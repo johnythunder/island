@@ -4,6 +4,7 @@ IR.menu = {
   SCR:['scrAuth','scrHome','scrMode','scrPlayers','scrRoom','scrInfo'],
   go(id){ this.SCR.forEach(s=>{const e=document.getElementById(s); if(e) e.classList.toggle('show',s===id);});
     const inGame=(id===null);
+    document.body.classList.toggle('ingame', inGame);
     document.getElementById('panel').style.display=inGame?'block':'none';
     IR.board.el.style.display=inGame?'block':'none';
     document.getElementById('sandDecks').style.display=inGame?'block':'none';
