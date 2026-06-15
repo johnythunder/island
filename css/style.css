@@ -301,8 +301,8 @@ body.night .langbar button.on{background:linear-gradient(180deg,#9fb8ff,#5b78d6)
 /* ---------- dice sprites on table ---------- */
 .tableDice{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:9px;z-index:6;pointer-events:none;
   --die-top:#f0554e;--die-l:#c23b34;--die-r:#9f2a24}
-.tableDice .tdie{width:42px;height:42px;display:flex;align-items:center;justify-content:center}
-.tableDice .tdie svg{width:42px;height:auto;display:block;filter:drop-shadow(0 5px 7px rgba(0,0,0,.5))}
+.tableDice .tdie{width:50px;height:50px;display:flex;align-items:center;justify-content:center}
+.tableDice .tdie svg{width:50px;height:auto;display:block;filter:drop-shadow(0 5px 7px rgba(0,0,0,.5))}
 .tableDice .pipT{fill:#fff8e6}
 .tableDice.live{pointer-events:auto;cursor:pointer}
 .tableDice.live .tdie{animation:dieBob 1.25s ease-in-out infinite}
@@ -312,3 +312,33 @@ body.night .langbar button.on{background:linear-gradient(180deg,#9fb8ff,#5b78d6)
 
 /* ---------- opponent highlight ---------- */
 .sandDeck.seatHi{outline:3px solid #ffe6a8;outline-offset:2px;box-shadow:0 0 18px 4px rgba(255,230,168,.75);transition:box-shadow .1s}
+
+/* ============ MOBILE ============ */
+#rotateHint{display:none}
+.rotInner{font-size:46px;line-height:1.4}
+.rotInner span{font-family:'Fraunces',serif;font-size:19px;display:inline-block;margin-top:8px}
+
+/* Портрет: сцена ландшафтна за природою — просимо повернути телефон.
+   Ховаємо ЛИШЕ ігрову сцену (меню/кімната працюють вертикально). */
+@media (orientation:portrait) and (max-width:820px){
+  body.ingame #rotateHint{display:flex;position:fixed;inset:0;z-index:200;
+    background:#0e1a24;color:#e8eef2;align-items:center;justify-content:center;text-align:center;padding:24px}
+  body.ingame #stage, body.ingame .panel, body.ingame .toggle, body.ingame .langbar,
+  body.ingame .chatToggle, body.ingame .chatBox, body.ingame #scoreBox,
+  body.ingame #revealBox, body.ingame #eventCard{visibility:hidden}
+}
+
+/* Ландшафт-телефон: компактна панель, щоб не закривала дошку; більші кубики */
+@media (max-width:900px) and (orientation:landscape){
+  .panel{width:188px;top:46px;right:8px;max-height:52vh;padding:9px 11px;border-radius:12px}
+  .panel h2{font-size:11px;margin-bottom:5px}
+  #log{max-height:26vh}
+  #log .l{font-size:11px}
+  #eventCard{width:118px;left:6px}
+  #eventCard .evNum{font-size:34px}
+  .tableDice{top:52%}
+  .tableDice .tdie,.tableDice .tdie svg{width:56px;height:56px}
+  .chatToggle{right:204px;top:10px;height:26px;padding:0 9px}
+  .chatBox{right:8px;top:44px;width:230px;height:min(280px,52vh)}
+  .toggle{top:8px}.langbar{top:8px}
+}
