@@ -5,7 +5,7 @@ IR.menu = {
   go(id){ this.SCR.forEach(s=>{const e=document.getElementById(s); if(e) e.classList.toggle('show',s===id);});
     const inGame=(id===null);
     document.body.classList.toggle('ingame', inGame);
-    document.getElementById('panel').style.display=inGame?'block':'none';
+    if(!inGame) document.body.classList.remove('panelOpen');
     IR.board.el.style.display=inGame?'block':'none';
     document.getElementById('sandDecks').style.display=inGame?'block':'none';
     document.getElementById('eventCard').style.display=inGame?'block':'none';
@@ -15,6 +15,7 @@ IR.menu = {
   info(title,html){ document.getElementById('infoBox').innerHTML='<h3>'+title+'</h3>'+html; this.go('scrInfo'); },
   init(){
     document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>this.go(b.dataset.back));
+    const pt=document.getElementById('panelToggle'); if(pt) pt.onclick=()=>document.body.classList.toggle('panelOpen');
     document.getElementById('modeGame').onclick=()=>{IR.cfg.mode='game';this.buildPlayers();this.go('scrPlayers');};
     document.getElementById('modeTest').onclick=()=>{IR.cfg.mode='test';this.buildPlayers();this.go('scrPlayers');};
     document.getElementById('plNext').onclick=()=>{ IR.room.create(IR.cfg.humans, IR.cfg.mode); };
