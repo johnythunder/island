@@ -110,3 +110,8 @@ Object.assign(IR.STR.pl,{pickDeckTitle:"Wybierz talię",waitDecks:"Czekamy na wy
 Object.assign(IR.STR.ua,{noNet:"Нема зв'язку з сервером",deckTaken:"Колоду вже взяли"});
 Object.assign(IR.STR.en,{noNet:"No server connection",deckTaken:"Deck already taken"});
 Object.assign(IR.STR.pl,{noNet:"Brak połączenia z serwerem",deckTaken:"Talia już zajęta"});
+
+/* ---- mobile ---- */
+Object.assign(IR.STR.ua,{rotate:"Поверни телефон горизонтально"});
+Object.assign(IR.STR.en,{rotate:"Turn your phone to landscape"});
+Object.assign(IR.STR.pl,{rotate:"Obróć telefon poziomo"});
