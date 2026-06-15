@@ -31,6 +31,7 @@ body.night .toggle button.on{background:linear-gradient(180deg,#9fb8ff,#5b78d6);
 .panel{position:fixed;top:64px;right:16px;z-index:18;width:300px;max-height:calc(100vh - 80px);overflow:auto;
  background:rgba(246,236,216,.9);backdrop-filter:blur(8px);border:1px solid rgba(0,0,0,.12);border-radius:16px;padding:14px 16px 16px;box-shadow:0 18px 36px rgba(0,0,0,.4);display:none}
 .panel h2{font-family:'Fraunces',serif;font-size:13px;margin:0 0 8px;text-transform:uppercase;color:var(--orange2)}
+body.ingame.panelOpen .panel{display:block}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
 button.b{font-family:'Spectral',serif;font-weight:600;border:none;border-radius:10px;padding:9px 14px;cursor:pointer;background:var(--orange);color:#fff;font-size:14px;box-shadow:0 3px 0 var(--orange2)}
 button.b.ghost{background:#e7d6b4;color:#5a3a22;box-shadow:0 3px 0 #cbb389}
@@ -341,4 +342,18 @@ body.night .langbar button.on{background:linear-gradient(180deg,#9fb8ff,#5b78d6)
   .chatToggle{right:204px;top:10px;height:26px;padding:0 9px}
   .chatBox{right:8px;top:44px;width:230px;height:min(280px,52vh)}
   .toggle{top:8px}.langbar{top:8px}
+}
+
+
+/* ---------- collapsible GAME panel (toggle like chat) ---------- */
+.panelToggle{position:fixed;top:14px;left:200px;z-index:31;display:none;align-items:center;gap:6px;
+  background:rgba(10,34,48,.7);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);color:#dfeaef;
+  height:30px;padding:0 13px;border-radius:999px;cursor:pointer;font-size:16px;line-height:1}
+body.ingame #panelToggle{display:inline-flex}
+body.ingame.panelOpen #panelToggle{background:rgba(240,200,120,.22);border-color:rgba(240,200,120,.5)}
+
+/* ---------- mobile landscape: shrink the deck carousel so it clears the dice ---------- */
+@media (max-width:900px) and (orientation:landscape){
+  #chooser{transform:scale(.5);transform-origin:bottom right;right:6px;bottom:6px}
+  .panelToggle{top:8px;left:150px;height:26px;padding:0 10px}
 }
