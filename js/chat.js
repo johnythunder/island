@@ -15,9 +15,8 @@ IR.chat = {
   },
   start(code){ this.code=code; this.msgs=[]; this.open=false; this.unread=0; this.render(); },
   stop(){ this.code=null; this.msgs=[]; this.open=false; this.unread=0;
-    if(this.toggleEl) this.toggleEl.style.display='none';
     if(this.boxEl) this.boxEl.style.display='none'; },
-  toggle(){ this.open=!this.open; if(this.open){ this.unread=0; setTimeout(()=>this.inputEl&&this.inputEl.focus(),0); } this.render(); },
+  toggle(){ this.open=!this.open; if(this.open){ this.unread=0; document.body.classList.remove('panelOpen'); setTimeout(()=>this.inputEl&&this.inputEl.focus(),0); } this.render(); },
   esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); },
   send(){ if(!this.code||!IR.net.me||!this.inputEl) return;
     const t=this.inputEl.value.trim(); if(!t) return;
@@ -28,8 +27,7 @@ IR.chat = {
     this.msgs.push(m); if(!this.open && !mine) this.unread++; this.render(); },
   render(){ if(!this.code){ this.stop(); return; }
     const me=IR.net.me?IR.net.me.name:null;
-    if(this.toggleEl){ this.toggleEl.style.display='inline-flex';
-      this.toggleEl.innerHTML='💬'+(this.unread?' <span class="chatBadge">'+this.unread+'</span>':''); }
+    if(this.toggleEl){ this.toggleEl.innerHTML='💬'+(this.unread?'<span class="chatBadge">'+this.unread+'</span>':''); }
     if(this.boxEl) this.boxEl.style.display=this.open?'flex':'none';
     if(this.inputEl) this.inputEl.placeholder=IR.t('chatPlaceholder');
     if(this.logEl){
