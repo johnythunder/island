@@ -15,7 +15,7 @@ IR.menu = {
   info(title,html){ document.getElementById('infoBox').innerHTML='<h3>'+title+'</h3>'+html; this.go('scrInfo'); },
   init(){
     document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>this.go(b.dataset.back));
-    const pt=document.getElementById('panelToggle'); if(pt) pt.onclick=()=>document.body.classList.toggle('panelOpen');
+    const pt=document.getElementById('panelToggle'); if(pt) pt.onclick=()=>{ const open=!document.body.classList.contains('panelOpen'); document.body.classList.toggle('panelOpen', open); if(open && IR.chat && IR.chat.open){ IR.chat.open=false; IR.chat.render(); } };
     document.getElementById('modeGame').onclick=()=>{IR.cfg.mode='game';this.buildPlayers();this.go('scrPlayers');};
     document.getElementById('modeTest').onclick=()=>{IR.cfg.mode='test';this.buildPlayers();this.go('scrPlayers');};
     document.getElementById('plNext').onclick=()=>{ IR.room.create(IR.cfg.humans, IR.cfg.mode); };
