@@ -117,7 +117,7 @@ IR.online = {
     s.pending=null;
     if(s.played.length>=24){
       s.phase='reveal'; s.revealIdx=0;
-      s.revealOrder=s.stack.map((e,i)=>i).sort((a,b)=>s.stack[a].sit-s.stack[b].sit);  // по ситуаціях 1→24
+      s.revealOrder=s.stack.map((e,i)=>i);  // у порядку розіграшу: перша зіграна — перша
       s.scores=s.participants.map(()=>0);
     } else { s.phase='move'; s.turn=(s.turn+1)%s.pawns.length; }
     this.broadcast(); this.render(); },
@@ -161,6 +161,15 @@ IR.online = {
       }
       this.renderTurn(s); this.renderMyDeck(s);
     }
+    this.applyPairHighlight(s);
+  },
+
+  applyPairHighlight(s){
+    const clear=()=>document.querySelectorAll('#sandDecks .seatPair').forEach(e=>e.classList.remove('seatPair'));
+    if(s.phase==='pick' && s.pending && !this._oppAnim){
+      clear();
+      [s.pending.aPi, s.pending.bPi].forEach(pi=>{ const el=document.querySelector('#sandDecks [data-pi="'+pi+'"]'); if(el) el.classList.add('seatPair'); });
+    } else if(s.phase!=='pick'){ clear(); }
   },
 
   renderReveal(s){ const isHost=this.isHost, P=s.participants;
