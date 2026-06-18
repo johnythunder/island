@@ -18,6 +18,7 @@ IR.t = (key, vars) => {
 };
 
 IR.setLang = l => { if(!IR.STR[l]) return; IR.LANG=l;
+  try{ document.documentElement.lang = (l==='ua'?'uk':l); }catch(e){}
   try{ localStorage.setItem('island_lang', l); }catch(e){}
   if(IR.net && IR.net.me) IR.net.savePrefs({lang:l});
   IR.i18n.apply(); };
