@@ -357,3 +357,27 @@ body.ingame.panelOpen #panelToggle{background:rgba(240,200,120,.22);border-color
   #chooser{transform:scale(.5);transform-origin:bottom right;right:6px;bottom:6px}
   .panelToggle{top:8px;left:150px;height:26px;padding:0 10px}
 }
+
+
+/* ============ grouped top-right toolbar (☰ 💬 day/night) ============ */
+.topRight{position:fixed;top:14px;right:16px;z-index:31;display:flex;align-items:center;gap:8px}
+.auxBtn{display:none;align-items:center;justify-content:center;position:relative;
+  background:rgba(10,34,48,.7);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);color:#dfeaef;
+  height:30px;min-width:40px;padding:0 11px;border-radius:999px;cursor:pointer;font-size:16px;line-height:1}
+body.ingame .auxBtn{display:inline-flex}
+body.ingame.panelOpen #panelToggle{background:rgba(240,200,120,.22);border-color:rgba(240,200,120,.5)}
+.auxBtn .chatBadge{position:absolute;top:-4px;right:-4px}
+
+/* GAME-панель і чат відкриваються в ОДНОМУ місці; видно лише одне за раз */
+.panel{display:none}
+#panel{top:56px;right:16px;left:auto;z-index:30}
+#chatBox{top:56px;right:16px;left:auto;z-index:31}
+
+/* пара, що розігрує — підсвічена до наступного кидка */
+.sandDeck.seatPair{outline:3px solid #ffd27a;outline-offset:2px;box-shadow:0 0 14px 2px rgba(255,210,122,.6)}
+
+@media (max-width:900px) and (orientation:landscape){
+  .topRight{top:8px;right:8px}
+  #panel{top:42px;right:8px;width:200px;max-height:54vh}
+  #chatBox{top:42px;right:8px;width:212px;height:min(280px,54vh)}
+}
