@@ -403,3 +403,9 @@ body.ingame.panelOpen #panelToggle{background:rgba(240,200,120,.22);border-color
 #scoreBox { left: calc(var(--fx) + 14px); top: calc(var(--fy) + 88px); right:auto; }
 #revealBox{ left:50%; right:auto; bottom: calc(var(--fy) + 18px); }
 #eventCard{ left: calc(var(--fx) + 18px); }
+
+
+/* chat input row: keep the send button fixed in place (no overflow/shift) */
+.chatRow{align-items:center}
+.chatRow input{min-width:0}      /* дозволяє полю стискатися, не виштовхуючи кнопку */
+.chatRow .b{flex:0 0 auto}        /* кнопка ➤ не стискається й не з'їжджає */
