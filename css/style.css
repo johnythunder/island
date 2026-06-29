@@ -381,3 +381,9 @@ body.ingame.panelOpen #panelToggle{background:rgba(240,200,120,.22);border-color
   #panel{top:42px;right:8px;width:200px;max-height:54vh}
   #chatBox{top:42px;right:8px;width:212px;height:min(280px,54vh)}
 }
+
+
+/* day/night sits inside the grouped toolbar row */
+.topRight .toggle{position:static;top:auto;right:auto;left:auto}
+.langbar{flex-wrap:wrap;max-width:230px}
+.langbar button{min-width:30px}
