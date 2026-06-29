@@ -324,8 +324,8 @@ body.night .langbar button.on{background:linear-gradient(180deg,#9fb8ff,#5b78d6)
 @media (orientation:portrait) and (max-width:820px){
   body.ingame #rotateHint{display:flex;position:fixed;inset:0;z-index:200;
     background:#0e1a24;color:#e8eef2;align-items:center;justify-content:center;text-align:center;padding:24px}
-  body.ingame #stage, body.ingame .panel, body.ingame .toggle, body.ingame .langbar,
-  body.ingame .chatToggle, body.ingame .chatBox, body.ingame #scoreBox,
+  body.ingame #stage, body.ingame .panel, body.ingame .topRight, body.ingame .langbar,
+  body.ingame .chatBox, body.ingame #scoreBox,
   body.ingame #revealBox, body.ingame #eventCard{visibility:hidden}
 }
 
@@ -387,3 +387,19 @@ body.ingame.panelOpen #panelToggle{background:rgba(240,200,120,.22);border-color
 .topRight .toggle{position:static;top:auto;right:auto;left:auto}
 .langbar{flex-wrap:wrap;max-width:230px}
 .langbar button{min-width:30px}
+
+
+/* ============ anchor chrome to the video frame (not the viewport) ============ */
+:root{
+  --fw: min(100vw, calc(100vh * 16 / 9));
+  --fh: min(100vh, calc(100vw * 9 / 16));
+  --fx: calc((100vw - var(--fw)) / 2);   /* бічне поле кадру */
+  --fy: calc((100vh - var(--fh)) / 2);   /* верхнє поле кадру */
+}
+.langbar  { left: calc(var(--fx) + 12px); top: calc(var(--fy) + 12px); right:auto; }
+.topRight { right: calc(var(--fx) + 12px); top: calc(var(--fy) + 12px); left:auto; }
+#panel    { right: calc(var(--fx) + 12px); top: calc(var(--fy) + 52px); left:auto; }
+#chatBox  { right: calc(var(--fx) + 12px); top: calc(var(--fy) + 52px); left:auto; }
+#scoreBox { left: calc(var(--fx) + 14px); top: calc(var(--fy) + 88px); right:auto; }
+#revealBox{ left:50%; right:auto; bottom: calc(var(--fy) + 18px); }
+#eventCard{ left: calc(var(--fx) + 18px); }
