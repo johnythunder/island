@@ -409,3 +409,10 @@ body.ingame.panelOpen #panelToggle{background:rgba(240,200,120,.22);border-color
 .chatRow{align-items:center}
 .chatRow input{min-width:0}      /* дозволяє полю стискатися, не виштовхуючи кнопку */
 .chatRow .b{flex:0 0 auto}        /* кнопка ➤ не стискається й не з'їжджає */
+
+
+/* coconut pawns: active one hops in rhythm with the dice + glows */
+@keyframes cocoHop{0%,100%{transform:translateY(0)}45%{transform:translateY(-7px)}70%{transform:translateY(0)}}
+.pawn.idol.active{animation:cocoHop .6s ease-in-out infinite}
+.pawn.idol.active .idolBody{stroke:#ffe6a8;stroke-width:2.6}
+.pawn.idol.active{filter:drop-shadow(0 0 7px #ffe6a8) drop-shadow(0 3px 4px rgba(0,0,0,.5))}
