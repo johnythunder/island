@@ -232,14 +232,31 @@ IR.online = {
       case 'pair': return IR.t('pairPlayed')+' '+nm(e.a)+' ↔ '+nm(e.b)+' · '+IR.t('reactionsClosed')+' · '+IR.t('pileWord')+' '+e.n+'/24';
       default: return ''; } },
 
-  idolSVG(color,n){ return '<svg viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg">'+
-      '<ellipse cx="20" cy="50" rx="11" ry="2.6" fill="rgba(0,0,0,.35)"/>'+
-      '<path class="idolBody" d="M20 2c-7 0-11 5-11 12 0 4 2 6.5 2 10.5 0 5-3 7-3 12 0 6 5 11 12 11s12-5 12-11c0-5-3-7-3-12 0-4 2-6.5 2-10.5C31 7 27 2 20 2z" fill="'+color+'" stroke="rgba(0,0,0,.35)" stroke-width="1.4"/>'+
-      '<path d="M11 15h18" stroke="rgba(255,255,255,.5)" stroke-width="1.2"/>'+
-      '<circle cx="15" cy="20" r="2.4" fill="#fff"/><circle cx="25" cy="20" r="2.4" fill="#fff"/>'+
-      '<circle cx="15" cy="20" r="1" fill="#1a1a1a"/><circle cx="25" cy="20" r="1" fill="#1a1a1a"/>'+
-      '<path d="M14 29q6 5 12 0" stroke="rgba(0,0,0,.45)" stroke-width="1.6" fill="none"/>'+
-      '<text x="20" y="46" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">'+n+'</text></svg>'; },
+  coverFor(color){ const d=IR.DECKS.find(d=>d.c===color)||IR.DECKS[0]; return 'assets/cards/covers/'+d.file; },
+  idolSVG(color,n){ const g='cc'+n+Math.random().toString(36).slice(2,6); const cover=this.coverFor(color);
+    return '<svg viewBox="0 0 44 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">'+
+      '<defs>'+
+        '<clipPath id="'+g+'c"><circle cx="22" cy="23" r="20"/></clipPath>'+
+        '<radialGradient id="'+g+'l" cx="34%" cy="26%" r="80%">'+
+          '<stop offset="0%" stop-color="#fff" stop-opacity=".5"/>'+
+          '<stop offset="46%" stop-color="#fff" stop-opacity="0"/></radialGradient>'+
+        '<radialGradient id="'+g+'d" cx="50%" cy="50%" r="62%">'+
+          '<stop offset="48%" stop-color="#000" stop-opacity="0"/>'+
+          '<stop offset="100%" stop-color="#000" stop-opacity=".6"/></radialGradient>'+
+      '</defs>'+
+      '<ellipse cx="22" cy="46.5" rx="13" ry="3" fill="rgba(0,0,0,.3)"/>'+
+      '<g clip-path="url(#'+g+'c)">'+
+        '<image href="'+cover+'" xlink:href="'+cover+'" x="2" y="3" width="40" height="40" preserveAspectRatio="xMidYMid slice"/>'+
+        '<rect x="2" y="3" width="40" height="40" fill="url(#'+g+'d)"/>'+
+        '<rect x="2" y="3" width="40" height="40" fill="url(#'+g+'l)"/>'+
+      '</g>'+
+      '<circle class="idolBody" cx="22" cy="23" r="20" fill="none" stroke="rgba(0,0,0,.42)" stroke-width="1.5"/>'+
+      '<ellipse cx="16" cy="21" rx="4.2" ry="5" fill="#fff" stroke="rgba(0,0,0,.4)" stroke-width=".6"/>'+
+      '<ellipse cx="28" cy="21" rx="4.2" ry="5" fill="#fff" stroke="rgba(0,0,0,.4)" stroke-width=".6"/>'+
+      '<circle cx="17" cy="22" r="2.1" fill="#241a12"/><circle cx="27" cy="22" r="2.1" fill="#241a12"/>'+
+      '<circle cx="17.8" cy="21.1" r=".7" fill="#fff"/><circle cx="27.8" cy="21.1" r=".7" fill="#fff"/>'+
+      '<path d="M17 31 Q22 35.5 27 31" stroke="rgba(0,0,0,.6)" stroke-width="1.7" fill="none" stroke-linecap="round"/>'+
+      '</svg>'; },
 
   renderPawns(s){ const ov=IR.board.overlay; if(!ov||!IR.cells) return; ov.innerHTML='';
     const byCell={}; s.pawns.forEach((pw,idx)=>{(byCell[pw.pos]=byCell[pw.pos]||[]).push(idx);});
@@ -247,7 +264,7 @@ IR.online = {
       const grp=byCell[pw.pos],k=grp.indexOf(idx),cnt=grp.length,ang=(k/Math.max(cnt,1))*Math.PI*2,off=cnt>1?11:0;
       const el=document.createElement('div'); el.className='pawn idol'+(idx===s.turn&&!s.finished?' active':'');
       el.style.left=(c.x*100)+'%'; el.style.top=(c.y*100)+'%';
-      el.style.marginLeft=(-17+Math.cos(ang)*off)+'px'; el.style.marginTop=(-42+Math.sin(ang)*off)+'px';
+      el.style.marginLeft=(-17+Math.cos(ang)*off)+'px'; el.style.marginTop=(-36+Math.sin(ang)*off)+'px';
       el.innerHTML=this.idolSVG(pw.color, idx+1); ov.appendChild(el);}); },
 
   highlightOpp(s, done){
