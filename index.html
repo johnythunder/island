@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="uk" translate="no"><head><meta charset="utf-8"/>
+<!DOCTYPE html><html lang="pl" translate="no"><head><meta charset="utf-8"/>
 <meta name="google" content="notranslate"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Island &amp; Relations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Spectral:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20260616d">
+<link rel="stylesheet" href="css/style.css?v=20260616e">
 </head>
 <body class="notranslate">
-<div id="rotateHint"><div class="rotInner">↻<br><span data-i18n="rotate">Поверни телефон горизонтально</span></div></div>
+<div id="rotateHint"><div class="rotInner">↻<br><span data-i18n="rotate">Obróć telefon poziomo</span></div></div>
 <div id="stage">
   <div id="bg">
     <video id="vidDay" class="bgvid" autoplay loop muted playsinline preload="auto"><source src="assets/video/day.mp4" type="video/mp4"></video>
@@ -22,75 +22,75 @@
   <div id="chooser"></div>
 </div>
 
-<div class="topRight"><button id="panelToggle" class="auxBtn">☰</button><button id="chatToggle" class="auxBtn">💬</button><div class="toggle"><button id="tDay" class="on" title="День">&#9728;</button><button id="tNight" title="Ніч">&#9790;</button></div></div>
-<div class="langbar"><button data-lang="ua">UA</button><button data-lang="pl">PL</button><button data-lang="en">EN</button><button data-lang="de">DE</button><button data-lang="ja">JA</button><button data-lang="ar">AR</button><button data-lang="hi">HI</button><button data-lang="sw">SW</button></div>
+<div class="topRight"><button id="panelToggle" class="auxBtn">☰</button><button id="chatToggle" class="auxBtn">💬</button><div class="toggle"><button id="tDay" class="on" title="Dzień">&#9728;</button><button id="tNight" title="Noc">&#9790;</button></div></div>
+<div class="langbar"><button data-lang="pl">PL</button><button data-lang="en">EN</button><button data-lang="de">DE</button><button data-lang="ja">JA</button><button data-lang="ar">AR</button><button data-lang="hi">HI</button><button data-lang="sw">SW</button></div>
 
 <div class="screen" id="scrMode">
-  <div class="brand" style="font-size:clamp(30px,5vw,56px)" data-i18n="chooseMode">Оберіть режим</div>
+  <div class="brand" style="font-size:clamp(30px,5vw,56px)" data-i18n="chooseMode">Wybierz tryb</div>
   <div class="card2" style="margin-top:24px">
-    <div class="modeCard" id="modeGame"><h3 data-i18n="modeGame">Гра</h3><p data-i18n="modeGameDesc">2–6 гравців. Кожен обирає свою колоду. Удвох — додається відьмо.</p></div>
-    <div class="modeCard" id="modeTest"><h3 data-i18n="modeTest">Тест / Ознайомлення</h3><p data-i18n="modeTestDesc">Ти проти 2+ відьмів. Щоб відчути гру наодинці.</p></div>
+    <div class="modeCard" id="modeGame"><h3 data-i18n="modeGame">Gra</h3><p data-i18n="modeGameDesc">2–6 graczy. Każdy wybiera talię. We dwoje — dochodzi Widmo.</p></div>
+    <div class="modeCard" id="modeTest"><h3 data-i18n="modeTest">Test / Zapoznanie</h3><p data-i18n="modeTestDesc">Ty kontra 2+ Widmo. Aby poczuć grę samemu.</p></div>
   </div>
-  <button class="mbtn sec backbtn" data-back="scrHome" data-i18n="back">← Назад</button>
+  <button class="mbtn sec backbtn" data-back="scrHome" data-i18n="back">← Wstecz</button>
 </div>
 
 <div class="screen" id="scrPlayers">
   <div class="panelDark">
-    <h3 id="plTitle">Гравці</h3>
+    <h3 id="plTitle">Gracze</h3>
     <div class="count" id="plCount"></div>
     <div id="plWidmo" class="hint"></div>
-    <button class="mbtn" id="plNext" style="margin-top:6px" data-i18n="nextToDeck">Далі — на палубу</button>
+    <button class="mbtn" id="plNext" style="margin-top:6px" data-i18n="nextToDeck">Dalej — na pokład</button>
   </div>
-  <button class="mbtn sec backbtn" data-back="scrMode" data-i18n="back">← Назад</button>
+  <button class="mbtn sec backbtn" data-back="scrMode" data-i18n="back">← Wstecz</button>
 </div>
 
-<div class="screen" id="scrInfo"><div class="panelDark" id="infoBox"></div><button class="mbtn sec backbtn" data-back="scrHome" data-i18n="back">← Назад</button></div>
+<div class="screen" id="scrInfo"><div class="panelDark" id="infoBox"></div><button class="mbtn sec backbtn" data-back="scrHome" data-i18n="back">← Wstecz</button></div>
 
 <div class="screen show" id="scrAuth">
   <div class="brand" style="font-size:clamp(40px,7vw,84px)">Island<span class="amp"> &amp; </span>Relations</div>
   <div class="panelDark" style="max-width:340px;margin-top:18px">
-    <h3 data-i18n="authTitle">Вхід</h3>
-    <input class="fld" id="authName" autocomplete="off" data-i18n-ph="nameLabel" placeholder="Імʼя"/>
-    <input class="fld" id="authPass" type="password" data-i18n-ph="passLabel" placeholder="Пароль"/>
+    <h3 data-i18n="authTitle">Logowanie</h3>
+    <input class="fld" id="authName" autocomplete="off" data-i18n-ph="nameLabel" placeholder="Imię"/>
+    <input class="fld" id="authPass" type="password" data-i18n-ph="passLabel" placeholder="Hasło"/>
     <div id="authErr" class="authErr"></div>
     <div class="row" style="justify-content:center;gap:10px;margin-top:4px">
-      <button class="mbtn" id="btnSignIn" data-i18n="signIn">Увійти</button>
-      <button class="mbtn sec" id="btnRegister" data-i18n="register">Реєстрація</button>
+      <button class="mbtn" id="btnSignIn" data-i18n="signIn">Zaloguj</button>
+      <button class="mbtn sec" id="btnRegister" data-i18n="register">Rejestracja</button>
     </div>
   </div>
 </div>
 
 <div class="screen" id="scrHome">
-  <div class="brand" style="font-size:clamp(30px,5vw,56px)" id="homeHello">Привіт!</div>
+  <div class="brand" style="font-size:clamp(30px,5vw,56px)" id="homeHello">Cześć!</div>
   <div class="panelDark" style="max-width:420px;margin-top:6px">
-    <h3 data-i18n="onIsland">Хто на острові</h3>
+    <h3 data-i18n="onIsland">Kto na wyspie</h3>
     <div id="onlineList" class="onlineList"></div>
   </div>
   <div id="homeMsg" class="authErr" style="text-align:center"></div>
   <div class="menuBtns" style="margin-top:18px">
-    <button class="mbtn" id="btnNewGame" data-i18n="newGame">Нова гра</button>
-    <button class="mbtn sec" id="btnOptions" data-i18n="options">Опції</button>
-    <button class="mbtn sec" id="btnDevHome" data-i18n="developers">Розробники</button>
-    <button class="mbtn sec" id="btnLogout" data-i18n="logout">Вийти</button>
+    <button class="mbtn" id="btnNewGame" data-i18n="newGame">Nowa gra</button>
+    <button class="mbtn sec" id="btnOptions" data-i18n="options">Opcje</button>
+    <button class="mbtn sec" id="btnDevHome" data-i18n="developers">Twórcy</button>
+    <button class="mbtn sec" id="btnLogout" data-i18n="logout">Wyloguj</button>
   </div>
 </div>
 
 <div class="screen" id="scrRoom">
-  <div class="brand" style="font-size:clamp(26px,4vw,44px)" data-i18n="roomTitle">Кімната</div>
+  <div class="brand" style="font-size:clamp(26px,4vw,44px)" data-i18n="roomTitle">Pokój</div>
   <div class="panelDark" style="max-width:470px">
-    <div class="hint"><span data-i18n="roomCode">Код кімнати</span>: <b id="roomCodeT">—</b> &nbsp;·&nbsp; <b id="roomCount">0 / 0</b></div>
-    <div class="row" style="margin:8px 0 4px"><input class="fld" id="roomLink" readonly style="margin:0;flex:1"/><button class="b" id="copyLinkBtn" data-i18n="copyLink">Копіювати посилання</button></div>
+    <div class="hint"><span data-i18n="roomCode">Kod pokoju</span>: <b id="roomCodeT">—</b> &nbsp;·&nbsp; <b id="roomCount">0 / 0</b></div>
+    <div class="row" style="margin:8px 0 4px"><input class="fld" id="roomLink" readonly style="margin:0;flex:1"/><button class="b" id="copyLinkBtn" data-i18n="copyLink">Kopiuj link</button></div>
     <div id="roomRoster" class="onlineList"></div>
-    <div class="rvTitle" style="margin:12px 0 6px;color:#e8c98f" data-i18n="pickDeckTitle">Обери колоду</div>
+    <div class="rvTitle" style="margin:12px 0 6px;color:#e8c98f" data-i18n="pickDeckTitle">Wybierz talię</div>
     <div id="roomDecks" class="deckGrid"></div>
-    <button class="mbtn" id="startGameBtn" data-i18n="startGame" style="display:none;margin-top:10px">Старт</button>
+    <button class="mbtn" id="startGameBtn" data-i18n="startGame" style="display:none;margin-top:10px">Start</button>
     <div class="hint" id="roomStatus" style="text-align:center;margin-top:8px"></div>
   </div>
-  <button class="mbtn sec" id="leaveRoomBtn" data-i18n="leaveRoom" style="margin-top:14px">Вийти з кімнати</button>
+  <button class="mbtn sec" id="leaveRoomBtn" data-i18n="leaveRoom" style="margin-top:14px">Opuść pokój</button>
 </div>
 
 <div id="chatBox" class="chatBox" style="display:none">
-  <div class="chatHead" data-i18n="chatTitle">Чат</div>
+  <div class="chatHead" data-i18n="chatTitle">Czat</div>
   <div id="chatLog" class="chatLog"></div>
   <div class="chatRow"><input id="chatText" maxlength="300"><button id="chatSend" class="b">➤</button></div>
 </div>
@@ -102,32 +102,32 @@
 
 <div class="panel" id="panel">
   <div id="playUI">
-    <h2 data-i18n="panelGame">Гра</h2>
-    <div class="turn" style="margin-bottom:6px"><span data-i18n="turnLabel">Хід:</span> <b id="turnName">—</b></div>
-    <div class="row"><button class="b" id="rollBtn" data-i18n="roll">Кинути</button><button class="b ghost" id="scoreBtn" data-i18n="score">Підрахунок</button></div>
-    <div class="row"><button class="b ghost" id="toMenu" data-i18n="menuBtn">☰ Меню</button></div>
-    <h2 style="margin-top:2px" data-i18n="logTitle">Журнал</h2><div class="log" id="log"></div>
+    <h2 data-i18n="panelGame">Gra</h2>
+    <div class="turn" style="margin-bottom:6px"><span data-i18n="turnLabel">Tura:</span> <b id="turnName">—</b></div>
+    <div class="row"><button class="b" id="rollBtn" data-i18n="roll">Rzuć</button><button class="b ghost" id="scoreBtn" data-i18n="score">Wynik</button></div>
+    <div class="row"><button class="b ghost" id="toMenu" data-i18n="menuBtn">☰ Menu</button></div>
+    <h2 style="margin-top:2px" data-i18n="logTitle">Dziennik</h2><div class="log" id="log"></div>
   </div>
 </div>
 
 <!-- modules (classic scripts, order matters) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/config.js?v=20260616d"></script>
-<script src="js/netconfig.js?v=20260616d"></script>
-<script src="js/layout.js?v=20260616d"></script>
-<script src="js/i18n.js?v=20260616d"></script>
-<script src="js/dice.js?v=20260616d"></script>
-<script src="js/daynight.js?v=20260616d"></script>
-<script src="js/board.js?v=20260616d"></script>
-<script src="js/cards.js?v=20260616d"></script>
-<script src="js/interaction.js?v=20260616d"></script>
-<script src="js/table.js?v=20260616d"></script>
-<script src="js/menu.js?v=20260616d"></script>
-<script src="js/net.js?v=20260616d"></script>
-<script src="js/auth.js?v=20260616d"></script>
-<script src="js/lobby.js?v=20260616d"></script>
-<script src="js/room.js?v=20260616d"></script>
-<script src="js/online.js?v=20260616d"></script>
-<script src="js/chat.js?v=20260616d"></script>
-<script src="js/main.js?v=20260616d"></script>
+<script src="js/config.js?v=20260616e"></script>
+<script src="js/netconfig.js?v=20260616e"></script>
+<script src="js/layout.js?v=20260616e"></script>
+<script src="js/i18n.js?v=20260616e"></script>
+<script src="js/dice.js?v=20260616e"></script>
+<script src="js/daynight.js?v=20260616e"></script>
+<script src="js/board.js?v=20260616e"></script>
+<script src="js/cards.js?v=20260616e"></script>
+<script src="js/interaction.js?v=20260616e"></script>
+<script src="js/table.js?v=20260616e"></script>
+<script src="js/menu.js?v=20260616e"></script>
+<script src="js/net.js?v=20260616e"></script>
+<script src="js/auth.js?v=20260616e"></script>
+<script src="js/lobby.js?v=20260616e"></script>
+<script src="js/room.js?v=20260616e"></script>
+<script src="js/online.js?v=20260616e"></script>
+<script src="js/chat.js?v=20260616e"></script>
+<script src="js/main.js?v=20260616e"></script>
 </body></html>
