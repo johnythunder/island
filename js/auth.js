@@ -11,16 +11,33 @@ IR.auth = {
       if(el) el.addEventListener('input',()=>{ document.getElementById('authErr').textContent=''; }); });
   },
   err(key){ document.getElementById('authErr').textContent=IR.t(key); },
-  attempt(isReg){
+  async attempt(isReg){
     const n=document.getElementById('authName').value, p=document.getElementById('authPass').value;
-    const r = isReg ? IR.net.register(n,p) : IR.net.login(n,p);
-    if(r.err){ this.err(r.err); return; }
-    if(r.acc){ if(r.acc.lang) IR.setLang(r.acc.lang); document.body.classList.toggle('night', !!r.acc.night); }
+    const codeEl=document.getElementById('authCode'); const code=codeEl?codeEl.value:'';
+    const bS=document.getElementById('btnSignIn'), bR=document.getElementById('btnRegister');
+    if(bS)bS.disabled=true; if(bR)bR.disabled=true;
+    let r; try{ r = isReg ? await IR.net.register(n,p,code) : await IR.net.login(n,p); }
+    catch(e){ r={err:'noNet'}; }
+    finally{ if(bS)bS.disabled=false; if(bR)bR.disabled=false; }
+    if(!r || r.err){ this.err(r?r.err:'noNet'); return; }
     IR.net.startPresence();
-    document.getElementById('authPass').value='';
+    document.getElementById('authPass').value=''; if(codeEl) codeEl.value='';
+    if(isReg) this.saveCredsPDF(n,p);
     let pend=null; try{ pend=sessionStorage.getItem(this.PEND); }catch(e){}
     if(pend){ try{ sessionStorage.removeItem(this.PEND); }catch(e){} IR.room.tryJoin(pend); }
     else IR.lobby.show();
+  },
+  saveCredsPDF(name,pass){
+    let sheet=document.getElementById('printSheet'); if(sheet) sheet.remove();
+    sheet=document.createElement('div'); sheet.id='printSheet';
+    sheet.innerHTML='<h1>'+IR.t('credsTitle')+'</h1><div class="pdate">'+new Date().toLocaleString()+'</div>'+
+      '<table class="ptbl"><tbody>'+
+      '<tr><td>'+IR.t('nameLabel')+'</td><td><b>'+name+'</b></td></tr>'+
+      '<tr><td>'+IR.t('passLabel')+'</td><td><b>'+pass+'</b></td></tr>'+
+      '</tbody></table><div class="pdate">'+IR.t('credsHint')+'</div>';
+    document.body.appendChild(sheet); document.body.classList.add('printing');
+    const done=()=>{ document.body.classList.remove('printing'); window.removeEventListener('afterprint',done); };
+    window.addEventListener('afterprint',done); setTimeout(()=>{ try{window.print();}catch(e){} setTimeout(done,3000); },60);
   },
   logout(){ IR.net.logout(); IR.menu.go('scrAuth'); },
   boot(){
