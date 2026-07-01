@@ -292,9 +292,9 @@ body.night .langbar button.on{background:linear-gradient(180deg,#9fb8ff,#5b78d6)
 .deckPick:not([disabled]):hover{border-color:rgba(255,255,255,.3)}
 
 /* ---------- idols (pawns) ---------- */
-.pawn.idol{width:34px;height:auto;margin:0;border:none;border-radius:0;background:none;box-shadow:none;
-  transform:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5));z-index:5;pointer-events:none;transition:left .18s ease,top .18s ease}
-.pawn.idol svg{width:34px;height:auto;display:block}
+.pawn.idol{width:42px;height:auto;margin:0;border:none;border-radius:0;background:none;box-shadow:none;
+  transform:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5));z-index:5;pointer-events:none}
+.pawn.idol svg{width:42px;height:auto;display:block}
 .pawn.idol.active{outline:none}
 .pawn.idol.active .idolBody{stroke:#ffe6a8;stroke-width:2.6}
 .pawn.idol.active{filter:drop-shadow(0 0 6px #ffe6a8) drop-shadow(0 3px 4px rgba(0,0,0,.5))}
@@ -412,7 +412,9 @@ body.ingame.panelOpen #panelToggle{background:rgba(240,200,120,.22);border-color
 
 
 /* coconut pawns: active one hops in rhythm with the dice + glows */
-@keyframes cocoHop{0%,100%{transform:translateY(0)}45%{transform:translateY(-7px)}70%{transform:translateY(0)}}
-.pawn.idol.active{animation:cocoHop .6s ease-in-out infinite}
+@keyframes cocoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes cocoStep{0%{transform:translateY(0)}42%{transform:translateY(-12px)}100%{transform:translateY(0)}}
+.pawn.idol.active:not(.walking){animation:cocoBob 1.25s ease-in-out infinite}  /* темп кубиків, лише активний */
+.pawn.idol.walking{animation:cocoStep .27s ease-out}                          /* крок по клітинці */
 .pawn.idol.active .idolBody{stroke:#ffe6a8;stroke-width:2.6}
 .pawn.idol.active{filter:drop-shadow(0 0 7px #ffe6a8) drop-shadow(0 3px 4px rgba(0,0,0,.5))}
