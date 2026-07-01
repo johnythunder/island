@@ -22,10 +22,25 @@ IR.auth = {
     if(!r || r.err){ this.err(r?r.err:'noNet'); return; }
     IR.net.startPresence();
     document.getElementById('authPass').value=''; if(codeEl) codeEl.value='';
-    if(isReg) this.saveCredsPDF(n,p);
+    if(isReg){ this.showCredsPrompt(n,p); return; }
+    this.afterAuth();
+  },
+  afterAuth(){
     let pend=null; try{ pend=sessionStorage.getItem(this.PEND); }catch(e){}
     if(pend){ try{ sessionStorage.removeItem(this.PEND); }catch(e){} IR.room.tryJoin(pend); }
     else IR.lobby.show();
+  },
+  showCredsPrompt(name,pass){
+    const ov=document.createElement('div'); ov.className='credsOverlay';
+    ov.innerHTML='<div class="credsCard"><h3>'+IR.t('credsTitle')+'</h3>'+
+      '<div class="credsRow"><span>'+IR.t('nameLabel')+'</span><b>'+name+'</b></div>'+
+      '<div class="credsRow"><span>'+IR.t('passLabel')+'</span><b>'+pass+'</b></div>'+
+      '<div class="credsWarn">'+IR.t('credsHint')+'</div>'+
+      '<div class="credsBtns"><button class="mbtn sec" id="credsPdfBtn">'+IR.t('credsSave')+'</button>'+
+      '<button class="mbtn" id="credsGoBtn">'+IR.t('credsEnter')+'</button></div></div>';
+    document.body.appendChild(ov);
+    ov.querySelector('#credsPdfBtn').onclick=()=>this.saveCredsPDF(name,pass);
+    ov.querySelector('#credsGoBtn').onclick=()=>{ ov.remove(); this.afterAuth(); };
   },
   saveCredsPDF(name,pass){
     let sheet=document.getElementById('printSheet'); if(sheet) sheet.remove();
