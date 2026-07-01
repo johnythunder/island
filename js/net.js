@@ -12,27 +12,34 @@ IR.net = {
     catch(e){ this.sb=null; }
     if(!this.sb) console.error('Supabase client not available (CDN/NETCFG?)');
     this.me = this.session();
+    try{ if(JSON.parse(localStorage.getItem('island_night')||'false')) document.body.classList.add('night'); }catch(e){}
     if(this.me) this.startPresence();
   },
 
-  // ---------- accounts (LOCAL) ----------
-  accounts(){ try{ return JSON.parse(localStorage.getItem(this.ACC)||'{}'); }catch(e){ return {}; } },
-  saveAccounts(a){ try{ localStorage.setItem(this.ACC, JSON.stringify(a)); }catch(e){} },
+  // ---------- accounts (Supabase users table + bcrypt RPCs; NO email) ----------
   session(){ try{ return JSON.parse(sessionStorage.getItem(this.SES)||'null'); }catch(e){ return null; } },
   setSession(u){ this.me=u; try{ sessionStorage.setItem(this.SES, JSON.stringify(u)); }catch(e){} },
-  register(name, pass){ name=(name||'').trim(); const key=name.toLowerCase();
+  async register(name, pass, code){ name=(name||'').trim();
     if(!name||!pass) return {err:'authErrEmpty'};
-    const a=this.accounts(); if(a[key]) return {err:'authErrExists'};
-    a[key]={name, pass, lang:IR.LANG, night:document.body.classList.contains('night')};
-    this.saveAccounts(a); this.setSession({name}); return {ok:true, acc:a[key]}; },
-  login(name, pass){ name=(name||'').trim(); const key=name.toLowerCase();
+    if(!this.sb) return {err:'noNet'};
+    try{ const {data,error}=await this.sb.rpc('register_user',{p_name:name,p_pass:pass,p_code:(code||'').trim()});
+      if(error||!data) return {err:'noNet'}; if(!data.ok) return {err:data.err||'noNet'};
+      this.setSession({name:data.name||name}); return {ok:true, acc:{name:data.name||name}}; }
+    catch(e){ return {err:'noNet'}; } },
+  async createInvite(name, pass){ if(!this.sb) return {err:'noNet'};
+    try{ const {data,error}=await this.sb.rpc('create_invite',{p_name:name,p_pass:pass});
+      if(error||!data) return {err:'noNet'}; if(!data.ok) return {err:data.err||'noNet'};
+      return {ok:true, code:data.code, expires:data.expires_at}; }
+    catch(e){ return {err:'noNet'}; } },
+  async login(name, pass){ name=(name||'').trim();
     if(!name||!pass) return {err:'authErrEmpty'};
-    const a=this.accounts(); if(!a[key]) return {err:'authErrNoUser'};
-    if(a[key].pass!==pass) return {err:'authErrWrongPass'};
-    this.setSession({name}); return {ok:true, acc:a[key]}; },
+    if(!this.sb) return {err:'noNet'};
+    try{ const {data,error}=await this.sb.rpc('login_user',{p_name:name,p_pass:pass});
+      if(error||!data) return {err:'noNet'}; if(!data.ok) return {err:data.err||'noNet'};
+      this.setSession({name:data.name||name}); return {ok:true, acc:{name:data.name||name}}; }
+    catch(e){ return {err:'noNet'}; } },
   logout(){ this.stopPresence(); this._unsubscribeRoom(); this.me=null; try{ sessionStorage.removeItem(this.SES); }catch(e){} },
-  savePrefs(patch){ if(!this.me) return; const a=this.accounts(), k=this.me.name.toLowerCase();
-    if(a[k]){ Object.assign(a[k], patch); this.saveAccounts(a); } },
+  savePrefs(patch){ try{ Object.keys(patch||{}).forEach(k=>localStorage.setItem('island_'+k, JSON.stringify(patch[k]))); }catch(e){} },
 
   // ---------- rooms (Supabase) ----------
   newCode(){ return Math.random().toString(36).slice(2,7).toUpperCase(); },
