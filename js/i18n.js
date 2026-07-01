@@ -139,3 +139,12 @@ Object.assign(IR.STR.ja, {"codeLabel": "招待コード", "codeHint": "招待コ
 Object.assign(IR.STR.ar, {"codeLabel": "رمز الدعوة", "codeHint": "رمز الدعوة — عند التسجيل فقط", "authErrBadCode": "رمز غير صالح أو منتهٍ", "authErrCodeSpent": "نفد رصيد الدعوات", "authErrBanned": "الحساب محظور", "authErrNoRights": "لا صلاحية"});
 Object.assign(IR.STR.hi, {"codeLabel": "आमंत्रण कोड", "codeHint": "आमंत्रण कोड — केवल पंजीकरण के लिए", "authErrBadCode": "अमान्य या समाप्त कोड", "authErrCodeSpent": "आमंत्रण कोटा समाप्त", "authErrBanned": "खाता प्रतिबंधित", "authErrNoRights": "अनुमति नहीं"});
 Object.assign(IR.STR.sw, {"codeLabel": "Msimbo wa mwaliko", "codeHint": "Msimbo wa mwaliko — kwa usajili tu", "authErrBadCode": "Msimbo si sahihi au umeisha", "authErrCodeSpent": "Kiasi cha mialiko kimeisha", "authErrBanned": "Akaunti imezuiwa", "authErrNoRights": "Huna ruhusa"});
+
+/* ===== creds prompt ===== */
+Object.assign(IR.STR.pl, {"credsSave": "Zapisz dane logowania (PDF)", "credsEnter": "Wejdź do gry"});
+Object.assign(IR.STR.en, {"credsSave": "Save login details (PDF)", "credsEnter": "Enter the game"});
+Object.assign(IR.STR.de, {"credsSave": "Zugangsdaten speichern (PDF)", "credsEnter": "Zum Spiel"});
+Object.assign(IR.STR.ja, {"credsSave": "ログイン情報を保存 (PDF)", "credsEnter": "ゲームへ"});
+Object.assign(IR.STR.ar, {"credsSave": "حفظ بيانات الدخول (PDF)", "credsEnter": "إلى اللعبة"});
+Object.assign(IR.STR.hi, {"credsSave": "लॉगिन जानकारी सहेजें (PDF)", "credsEnter": "खेल में जाएँ"});
+Object.assign(IR.STR.sw, {"credsSave": "Hifadhi taarifa za kuingia (PDF)", "credsEnter": "Ingia mchezoni"});
