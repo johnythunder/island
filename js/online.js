@@ -234,9 +234,9 @@ IR.online = {
 
   coverFor(color){ const d=IR.DECKS.find(d=>d.c===color)||IR.DECKS[0]; return 'assets/cards/covers/'+d.file; },
   idolSVG(color,n){ const g='cc'+n+Math.random().toString(36).slice(2,6); const cover=this.coverFor(color);
-    return '<svg viewBox="0 0 44 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">'+
+    return '<svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">'+
       '<defs>'+
-        '<clipPath id="'+g+'c"><circle cx="22" cy="23" r="20"/></clipPath>'+
+        '<clipPath id="'+g+'c"><circle cx="30" cy="26" r="19"/></clipPath>'+
         '<radialGradient id="'+g+'l" cx="34%" cy="26%" r="80%">'+
           '<stop offset="0%" stop-color="#fff" stop-opacity=".5"/>'+
           '<stop offset="46%" stop-color="#fff" stop-opacity="0"/></radialGradient>'+
@@ -244,28 +244,61 @@ IR.online = {
           '<stop offset="48%" stop-color="#000" stop-opacity="0"/>'+
           '<stop offset="100%" stop-color="#000" stop-opacity=".6"/></radialGradient>'+
       '</defs>'+
-      '<ellipse cx="22" cy="46.5" rx="13" ry="3" fill="rgba(0,0,0,.3)"/>'+
+      '<ellipse cx="30" cy="65" rx="15" ry="3.2" fill="rgba(0,0,0,.28)"/>'+
+      '<g class="legs" stroke="#2a1c10" stroke-width="3.2" fill="none" stroke-linecap="round">'+
+        '<path class="legL" d="M25 43 Q23 53 24 59"/><path class="legR" d="M35 43 Q37 53 36 59"/></g>'+
+      '<ellipse class="shoeL" cx="21.5" cy="60" rx="5" ry="2.9" fill="#17100a"/>'+
+      '<ellipse class="shoeR" cx="38.5" cy="60" rx="5" ry="2.9" fill="#17100a"/>'+
+      '<g class="arms" stroke="#2a1c10" stroke-width="3" fill="none" stroke-linecap="round">'+
+        '<path d="M14 30 Q6 35 8 42"/><path d="M46 30 Q54 35 52 42"/></g>'+
+      '<circle cx="8" cy="43" r="3.4" fill="#fff" stroke="#2a1c10" stroke-width="1"/>'+
+      '<circle cx="52" cy="43" r="3.4" fill="#fff" stroke="#2a1c10" stroke-width="1"/>'+
       '<g clip-path="url(#'+g+'c)">'+
-        '<image href="'+cover+'" xlink:href="'+cover+'" x="2" y="3" width="40" height="40" preserveAspectRatio="xMidYMid slice"/>'+
-        '<rect x="2" y="3" width="40" height="40" fill="url(#'+g+'d)"/>'+
-        '<rect x="2" y="3" width="40" height="40" fill="url(#'+g+'l)"/>'+
+        '<image href="'+cover+'" xlink:href="'+cover+'" x="11" y="7" width="38" height="38" preserveAspectRatio="xMidYMid slice"/>'+
+        '<rect x="11" y="7" width="38" height="38" fill="url(#'+g+'d)"/>'+
+        '<rect x="11" y="7" width="38" height="38" fill="url(#'+g+'l)"/>'+
       '</g>'+
-      '<circle class="idolBody" cx="22" cy="23" r="20" fill="none" stroke="rgba(0,0,0,.42)" stroke-width="1.5"/>'+
-      '<ellipse cx="16" cy="21" rx="4.2" ry="5" fill="#fff" stroke="rgba(0,0,0,.4)" stroke-width=".6"/>'+
-      '<ellipse cx="28" cy="21" rx="4.2" ry="5" fill="#fff" stroke="rgba(0,0,0,.4)" stroke-width=".6"/>'+
-      '<circle cx="17" cy="22" r="2.1" fill="#241a12"/><circle cx="27" cy="22" r="2.1" fill="#241a12"/>'+
-      '<circle cx="17.8" cy="21.1" r=".7" fill="#fff"/><circle cx="27.8" cy="21.1" r=".7" fill="#fff"/>'+
-      '<path d="M17 31 Q22 35.5 27 31" stroke="rgba(0,0,0,.6)" stroke-width="1.7" fill="none" stroke-linecap="round"/>'+
+      '<circle class="idolBody" cx="30" cy="26" r="19" fill="none" stroke="rgba(0,0,0,.42)" stroke-width="1.5"/>'+
+      '<ellipse cx="24" cy="24" rx="4" ry="4.8" fill="#fff" stroke="rgba(0,0,0,.4)" stroke-width=".6"/>'+
+      '<ellipse cx="36" cy="24" rx="4" ry="4.8" fill="#fff" stroke="rgba(0,0,0,.4)" stroke-width=".6"/>'+
+      '<circle cx="25" cy="25" r="2" fill="#241a12"/><circle cx="35" cy="25" r="2" fill="#241a12"/>'+
+      '<circle cx="25.7" cy="24.2" r=".6" fill="#fff"/><circle cx="35.7" cy="24.2" r=".6" fill="#fff"/>'+
+      '<path d="M25 33 Q30 37 35 33" stroke="rgba(0,0,0,.6)" stroke-width="1.7" fill="none" stroke-linecap="round"/>'+
       '</svg>'; },
 
-  renderPawns(s){ const ov=IR.board.overlay; if(!ov||!IR.cells) return; ov.innerHTML='';
-    const byCell={}; s.pawns.forEach((pw,idx)=>{(byCell[pw.pos]=byCell[pw.pos]||[]).push(idx);});
-    s.pawns.forEach((pw,idx)=>{const c=IR.cells[pw.pos]; if(!c)return;
-      const grp=byCell[pw.pos],k=grp.indexOf(idx),cnt=grp.length,ang=(k/Math.max(cnt,1))*Math.PI*2,off=cnt>1?11:0;
-      const el=document.createElement('div'); el.className='pawn idol'+(idx===s.turn&&!s.finished?' active':'');
-      el.style.left=(c.x*100)+'%'; el.style.top=(c.y*100)+'%';
-      el.style.marginLeft=(-17+Math.cos(ang)*off)+'px'; el.style.marginTop=(-36+Math.sin(ang)*off)+'px';
-      el.innerHTML=this.idolSVG(pw.color, idx+1); ov.appendChild(el);}); },
+  posAt(el,pos,ang,off){ const c=IR.cells[pos]; if(!c) return;
+    el.style.left=(c.x*100)+'%'; el.style.top=(c.y*100)+'%';
+    el.style.marginLeft=(-20+Math.cos(ang)*off)+'px'; el.style.marginTop=(-48+Math.sin(ang)*off)+'px'; },
+  placePawn(el,pos,idx){ const s=this.state; const at=[];
+    s.pawns.forEach((p,i)=>{ if(p.pos===pos && !(this._els&&this._els[i]&&this._els[i]._walking&&i!==idx)) at.push(i); });
+    const k=at.indexOf(idx),cnt=at.length,many=cnt>1,ang=many?(k/cnt)*Math.PI*2:0,off=many?12:0;
+    this.posAt(el,pos,ang,off); },
+  walkPawn(idx,target){ const el=this._els[idx]; if(!el) return; el._walking=true;
+    const step=()=>{
+      if(this._disp[idx]===target){ el._walking=false; el.classList.remove('walking');
+        this.placePawn(el,target,idx);
+        const s=this.state; s.pawns.forEach((p,i)=>{ if(i!==idx&&p.pos===target&&this._els[i]&&!this._els[i]._walking) this.placePawn(this._els[i],target,i); });
+        return; }
+      this._disp[idx]=(this._disp[idx]+1)%25;
+      this.posAt(el,this._disp[idx],0,0);
+      el.classList.remove('walking'); void el.offsetWidth; el.classList.add('walking');
+      setTimeout(step,270);
+    };
+    setTimeout(step,90); },
+  renderPawns(s){ const ov=IR.board.overlay; if(!ov||!IR.cells) return;
+    this._els=this._els||{}; this._disp=this._disp||{};
+    s.pawns.forEach((pw,idx)=>{
+      let el=this._els[idx];
+      if(!el || el.parentNode!==ov){
+        el=document.createElement('div'); el.className='pawn idol'; el._walking=false;
+        el.innerHTML=this.idolSVG(pw.color, idx+1); ov.appendChild(el);
+        this._els[idx]=el; this._disp[idx]=pw.pos; this.placePawn(el,pw.pos,idx); }
+      el.classList.toggle('active', idx===s.turn && !s.finished);
+      if(el._walking) return;
+      if(this._disp[idx]!==pw.pos) this.walkPawn(idx,pw.pos);
+      else this.placePawn(el,pw.pos,idx);
+    });
+    Object.keys(this._els).forEach(k=>{ if(+k>=s.pawns.length){ if(this._els[k].parentNode) this._els[k].remove(); delete this._els[k]; delete this._disp[k]; } }); },
 
   highlightOpp(s, done){
     const aPi=s.pawns[s.turn].pi, P=s.participants, bPi=s.pending.bPi;
